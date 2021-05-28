@@ -8,14 +8,10 @@ spec:
     interval: 5m
     chart:
         spec:
-            chart: ./charts/tekton-pipeline
+            chart: tekton-pipeline
+            version: 0.24.2
             sourceRef:
-                kind: GitRepository
+                kind: HelmRepository
                 name: tekton-helm-chart
                 namespace: flux-system
-            interval: 1m
-    values:
-        replicaCount: 2
-        auth:
-            docker:
-                url: https://hub.docker.com
+            interval: 5m

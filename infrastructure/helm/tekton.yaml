@@ -1,11 +1,10 @@
 ---
 apiVersion: source.toolkit.fluxcd.io/v1beta1
-kind: GitRepository
+kind: HelmRepository
 metadata:
     name: tekton-helm-chart
     namespace: flux-system
 spec:
-    interval: 30s
-    ref:
-        branch: master
-    url: https://github.com/cdfoundation/tekton-helm-chart
+    interval: 10m
+    url: https://cdfoundation.github.io/tekton-helm-chart/
+    timeout: 3m
