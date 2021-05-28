@@ -7,8 +7,8 @@ spec:
     - name: push
       image: nixos/nix
       script: |
-        #!/usr/bin/env bash
-        echo "Hello from Bash!"
+        #!/usr/bin/env sh
+        echo "Hello from sh!"
         mkdir /etc/containers
         echo '{"default": [{"type": "insecureAcceptAnything"}], "transports": {"docker-daemon": {"": [{"type":"insecureAcceptAnything"}]}}}' > /etc/containers/policy.json
         nix-env -iA nixpkgs.nixUnstable nixpkgs.skopeo
