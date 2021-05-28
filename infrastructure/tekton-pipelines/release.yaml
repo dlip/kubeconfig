@@ -15,4 +15,3 @@ spec:
                 name: tekton
                 namespace: flux-system
             interval: 5m
-    values:
