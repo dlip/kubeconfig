@@ -3,4 +3,3 @@ kind: Kustomization
 resources:
     - helm
     - tekton-pipelines
-    - secrets.yaml
