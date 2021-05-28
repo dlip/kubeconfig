@@ -25,6 +25,20 @@ spec:
     kind: GitRepository
     name: flux-system
   validation: client
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+kind: Kustomization
+metadata:
+  name: infrastructure
+  namespace: flux-system
+spec:
+  interval: 1m0s
+  path: ./infrastructure
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  validation: client
   # Enable decryption
   decryption:
     # Use the sops provider
