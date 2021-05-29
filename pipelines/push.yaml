@@ -3,6 +3,7 @@ kind: Task
 metadata:
   name: push
 spec:
+  serviceAccountName: tekton
   steps:
     - name: push
       image: nixos/nix
