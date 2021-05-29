@@ -18,11 +18,9 @@ spec:
       description: Docker image version
   steps:
     - name: push
-      image: nixos/nix
-      script: |
-        #!/usr/bin/env sh
-        echo "Hello from sh!"
-        mkdir /etc/containers
-        echo '{"default": [{"type": "insecureAcceptAnything"}], "transports": {"docker-daemon": {"": [{"type":"insecureAcceptAnything"}]}}}' > /etc/containers/policy.json
-        nix-env -iA nixpkgs.nixUnstable nixpkgs.skopeo
-        nix --experimental-features nix-command store cat --store $(params.store) $(params.outputPath) | skopeo copy docker-archive:/dev/stdin docker://$(params.image):$(params.version)
+      image: dlip/push-nix-store-docker-image
+      args:
+        - "$(params.store)"
+        - "$(params.outputPath)"
+        - "$(params.image)"
+        - "$(params.store):$(params.version)"
