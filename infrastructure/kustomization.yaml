@@ -4,3 +4,4 @@ resources:
     - helm
     - tekton-pipelines
     - secrets.yaml
+    - serviceaccounts.yaml
