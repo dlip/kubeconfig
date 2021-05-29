@@ -3,4 +3,5 @@ kind: Kustomization
 resources:
     - release.yaml
     - tekton-dashboard.yaml
+    - triggers.yaml
     - service.yaml
