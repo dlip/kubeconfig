@@ -3,6 +3,19 @@ kind: Task
 metadata:
   name: push
 spec:
+  params:
+    - name: store
+      type: string
+      description: Store URL
+    - name: outputPath
+      type: string
+      description: Output path of .tar.gz in store
+    - name: image
+      type: string
+      description: Docker image name
+    - name: version
+      type: string
+      description: Docker image version
   steps:
     - name: push
       image: nixos/nix
@@ -12,4 +25,4 @@ spec:
         mkdir /etc/containers
         echo '{"default": [{"type": "insecureAcceptAnything"}], "transports": {"docker-daemon": {"": [{"type":"insecureAcceptAnything"}]}}}' > /etc/containers/policy.json
         nix-env -iA nixpkgs.nixUnstable nixpkgs.skopeo
-        nix --experimental-features nix-command store cat --store http://nix-cache.home.lipscombe.com.au/ /nix/store/c9ik4y32qcgy1zk01wc7p7zgk1a9kpnz-envy.sh.tar.gz | skopeo copy docker-archive:/dev/stdin docker://dlip/envynix
+        nix --experimental-features nix-command store cat --store $(params.store) $(params.outputPath) | skopeo copy docker-archive:/dev/stdin docker://$(params.image):$(params.version)
