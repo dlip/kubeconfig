@@ -22,5 +22,4 @@ spec:
       args:
         - "$(params.store)"
         - "$(params.outputPath)"
-        - "$(params.image)"
-        - "$(params.store):$(params.version)"
+        - "$(params.image):$(params.version)"

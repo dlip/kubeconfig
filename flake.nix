@@ -32,6 +32,7 @@
               #!${runtimeShell}
               set -euo pipefail
               mkdir -p /var/tmp
+              echo "nix --experimental-features nix-command store cat --store $1 $2 | skopeo --insecure-policy copy docker-archive:/dev/stdin docker://$3"
               nix --experimental-features nix-command store cat --store $1 $2 | skopeo --insecure-policy copy docker-archive:/dev/stdin docker://$3
             '')
           ];
@@ -66,7 +67,7 @@
             };
         };
         devShell = pkgs.mkShell {
-          buildInputs = with pkgs; [ fluxcd kustomize ];
+          buildInputs = with pkgs; [ fluxcd kustomize skopeo ];
         };
       });
 }
