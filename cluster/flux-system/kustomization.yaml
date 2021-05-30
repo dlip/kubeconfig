@@ -6,4 +6,4 @@ resources:
     - ../../infrastructure
     - ../../pipelines
 patchesStrategicMerge:
-    - patch-add-sops.yaml
+    - gotk-patches.yaml
