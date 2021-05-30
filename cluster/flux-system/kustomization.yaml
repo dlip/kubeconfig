@@ -5,3 +5,5 @@ resources:
     - gotk-sync.yaml
     - ../../infrastructure
     - ../../pipelines
+patchesStrategicMerge:
+    - patch-add-sops.yaml
