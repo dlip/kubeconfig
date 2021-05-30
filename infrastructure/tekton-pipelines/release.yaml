@@ -8,10 +8,9 @@ spec:
     interval: 5m
     chart:
         spec:
-            chart: tekton-pipeline
-            version: 0.24.2
+            chart: ./charts/tekton-pipeline
             sourceRef:
-                kind: HelmRepository
+                kind: GitRepository
                 name: tekton-helm-chart
                 namespace: flux-system
-            interval: 5m
+            interval: 1m
