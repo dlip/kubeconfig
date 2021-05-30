@@ -1,6 +1,8 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
+    - repository.yaml
     - release.yaml
     - tekton-dashboard.yaml
     - service.yaml
+    - triggers.yaml
