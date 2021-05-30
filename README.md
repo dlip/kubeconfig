@@ -1,5 +1,4 @@
 ```sh
-nix develop
-skopeo login docker.io
-push-docker-images
+nix run .#dockerLogin
+nix run .#pushDockerImages
 ```

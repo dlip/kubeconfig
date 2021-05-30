@@ -20,10 +20,6 @@
           set -euo pipefail
           ${skopeo}/bin/skopeo --insecure-policy copy docker-archive:$1 docker://$2
         '';
-        pushDockerImages = with pkgs; writeScriptBin "push-docker-images" ''
-          set -euo pipefail
-          ${pushDockerImage}/bin/push-docker-image ${pushNixStoreDockerImage} dlip/push-nix-store-docker-image
-        '';
         pushNixStoreDockerImage = with pkgs; dockerTools.buildLayeredImage {
           name = "dlip/push-nix-store-docker-image";
           tag = "latest";
@@ -48,11 +44,24 @@
         apps = {
           repl = flake-utils.lib.mkApp
             {
-              drv = pkgs.writeShellScriptBin "repl" ''
+              drv = with pkgs; writeShellScriptBin "repl" ''
                 confnix=$(mktemp)
                 echo "builtins.getFlake (toString $(git rev-parse --show-toplevel))" >$confnix
                 trap "rm $confnix" EXIT
                 nix repl $confnix
+              '';
+            };
+          dockerLogin = flake-utils.lib.mkApp
+            {
+              drv = with pkgs; writeShellScriptBin "login" ''
+                ${skopeo}/bin/skopeo login docker.io
+              '';
+            };
+          pushDockerImages = flake-utils.lib.mkApp
+            {
+              drv = with pkgs; writeScriptBin "push-docker-images" ''
+                set -euo pipefail
+                ${pushDockerImage}/bin/push-docker-image ${pushNixStoreDockerImage} dlip/push-nix-store-docker-image
               '';
             };
         };
