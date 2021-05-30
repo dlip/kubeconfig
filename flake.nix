@@ -66,7 +66,7 @@
             };
         };
         devShell = pkgs.mkShell {
-          buildInputs = with pkgs; [ pushDockerImage pushDockerImages skopeo ];
+          buildInputs = with pkgs; [ fluxcd kustomize ];
         };
       });
 }
